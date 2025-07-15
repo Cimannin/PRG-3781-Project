@@ -1,4 +1,4 @@
-package com.bcwellness;
+package bcwellness;
 
 import java.sql.*;
 //this is for the database connection

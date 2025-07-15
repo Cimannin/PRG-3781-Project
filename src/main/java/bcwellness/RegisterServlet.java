@@ -1,4 +1,4 @@
-package com.bcwellness;
+package bcwellness;
 
 import java.io.*;
 import java.sql.*;
@@ -17,7 +17,7 @@ public class RegisterServlet extends HttpServlet {
         String user_password = request.getParameter("user_password");
 
         try(Connection conn = DBConnection.getConnection()) {
-            PreparedStatement check = conn.preparedStatement("SELECT * FROM users WHERE email=?");
+            PreparedStatement check = conn.prepareStatement("SELECT * FROM users WHERE email=?");
             check.setString(1, email);
             ResultSet rs = check.executeQuery();
 
@@ -27,7 +27,9 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            PreparedStatement ps = conn.preparedStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO users (student_number, student_name, surname, email, phone, user_password) VALUES (?, ?, ?, ?, ?, ?)"
+            );
             ps.setString(1, student_number);
             ps.setString(2, student_name);
             ps.setString(3, surname);
@@ -40,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
 
         }catch (Exception e){
             e.printStackTrace();
-            response.sendRedirect("register.jsp")
+            response.sendRedirect("register.jsp");
         }
     }
 }
