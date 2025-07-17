@@ -10,7 +10,7 @@ Also uses PostgreSQL.
 1. **Clone the repo**
     bash:
     git clone https://...
-    
+    cd PRG-3781-Project
     
 2.**Make sure Tomcat and Maven are Installed(Apache)**
 
@@ -45,3 +45,27 @@ Also uses PostgreSQL.
 **File Structure:**
 
 <img width="566" height="593" alt="image" src="https://github.com/user-attachments/assets/a3d27eae-1f33-44ae-a925-a8b7282d00a3" />
+
+
+
+**Technologies Used:**
+
+ --Java:  Core language
+
+ --JSP and Servlets: 	View and controller layers
+
+ --PostgreSQL: 	Backend database
+
+ --Apache Maven: Build & dependency management
+
+ --Apache Tomcat 9: 	Web application server (Java EE 8)
+
+ --IntelliJ IDEA: 	IDE used for development
+
+
+
+**Security Features:**
+
+--SHA-256 Password Hashing for secure storage within postgreSQL
+
+--Validation for Email, password and student number
