@@ -29,7 +29,7 @@
         <input type="text" name="student_name" placeholder="Name"  required pattern="[A-Za-z\s]+" title="Only letters and spaces allowed">
         <input type="text" name="surname" placeholder="Surname" required pattern="[A-Za-z\s]+" title="Only letters and spaces allowed">
         <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="phone" placeholder="Phone" required>
+        <input type="text" name="phone" placeholder="Phone" required pattern="0[6-8][0-9]{8}" title="Has to be in this format: 0(6-9)...">
         <input type="password" name="user_password" placeholder="Password" required pattern=".{6,}" title="Password must be at least 6 characters long">
         <input type="submit" value="Register">
     </form>
