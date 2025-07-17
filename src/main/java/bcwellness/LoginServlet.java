@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 
             ResultSet rs = ps.executeQuery();
 
+            //the session is active, when their password and emails match with what is in the database
             if (rs.next()){
                 HttpSession session = request.getSession();
                 System.out.println("User found:" + rs.getString("student_name") );
@@ -31,6 +32,7 @@ public class LoginServlet extends HttpServlet {
             }else{
                 System.out.println("User not found:" + rs.getString("student_name") );
 
+                //if this user types in the wrong information, this message will show.
                 request.setAttribute("Message", "Invalid credentials.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

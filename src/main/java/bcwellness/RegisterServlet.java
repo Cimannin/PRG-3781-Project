@@ -18,21 +18,24 @@ public class RegisterServlet extends HttpServlet {
         String user_password = PasswordHash.hashPassword(rawPassword);
 
         try(Connection conn = DBConnection.getConnection()) {
-
+            //Created this variable to check the email
             PreparedStatement checkEmail = conn.prepareStatement("SELECT * FROM users WHERE email = ?");
             checkEmail.setString(1, email);
             ResultSet rsEmail = checkEmail.executeQuery();
 
+            //when the user registers, it'll check if that email they entered already exists.
             if (rsEmail.next()){
                 request.setAttribute("message", "Email is already in use.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
+            //created this variable to check the student number, because no user can have the same student number.
             PreparedStatement checkStudent = conn.prepareStatement("SELECT * FROM users WHERE student_number = ?");
             checkStudent.setString(1, student_number);
             ResultSet rsStudent = checkStudent.executeQuery();
 
+            //This message will display if the student number already exists
             if(rsStudent.next()){
                 request.setAttribute("studentCodeMessage", "This student number already exists.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
@@ -52,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("registerSuccess", "Registration successful! Please log in.");
             response.sendRedirect("login.jsp");
-
+        //this inserts all the registered information inside the table.
         }catch (Exception e){
             e.printStackTrace();
             response.sendRedirect("register.jsp");
