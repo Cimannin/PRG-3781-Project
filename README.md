@@ -12,9 +12,14 @@ Also uses PostgreSQL.
     git clone https://...
     cd PRG-3781-Project
     
-2.**Make sure Tomcat and Maven are Installed(Apache)**
+2.**Make sure Tomcat,Maven and PostgreSQL are Installed**
 
     REQUIRED TOOLS:
+
+    PostgreSQL:
+    https://www.postgresql.org/download/
+      --Provides the database/storage for the users
+    
     
     Apache Tomcat:
     https://tomcat.apache.org/download-90.cgi
@@ -24,16 +29,37 @@ Also uses PostgreSQL.
     Apache Maven:
     https://maven.apache.org/download.cgi
        --Helps manage dependencies automatically.
-       
 
-3. **Open in IntelliJ IDEA:**
+
+       
+3.**Create Table within PostgreSQL:**
+
+    --Open postgreSQL and it'll install and extract.
+    --From there create your own username and password to access said database
+    --Create a new database by right-clicking on database
+    --On the new database, right-click, open PSQL Tool
+
+
+   --Create a table within PostgreSQL with this schema:
+   
+       CREATE TABLE users (
+      student_number VARCHAR(20) PRIMARY KEY,
+      name VARCHAR(50) NOT NULL,
+      surname VARCHAR(50) NOT NULL,
+      email VARCHAR(100) UNIQUE NOT NULL,
+      phone VARCHAR(20),
+      password TEXT NOT NULL
+      );
+
+4. **Open in IntelliJ IDEA:**
 
    --Open IntelliJ → File > Open → Select the project directory
    
    --Maven should auto-import pom.xml. If not, right-click it and choose "Add as Maven project".
+
    
 
-4. **Run the App:**
+5. **Run the App:**
    
    --Build the project using Maven or IntelliJ Build Tools
    
@@ -45,6 +71,7 @@ Also uses PostgreSQL.
 **File Structure:**
 
 <img width="566" height="593" alt="image" src="https://github.com/user-attachments/assets/a3d27eae-1f33-44ae-a925-a8b7282d00a3" />
+
 
 
 
