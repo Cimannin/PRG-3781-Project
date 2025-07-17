@@ -2,7 +2,7 @@ package bcwellness;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+//created this to hash each and every password entered by a user
 public class PasswordHash {
     public static String hashPassword(String password) {
         try {

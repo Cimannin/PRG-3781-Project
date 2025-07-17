@@ -20,9 +20,9 @@
 
     <p class="fade-in">You are successfully logged into your dashboard.</p>
 
-    <form action="logout" method="post" style="margin-top: 20px;">
-        <input type="submit" value="Logout" class="button">
-    </form>
+ <form action="logout" method="post" style="margin-top: 20px;">
+     <input type="submit" value="Logout" class="button">
+ </form>
 
     <a href="index.jsp" class="button-outline" style="margin-top: 10px; display:inline-block;">← Back to Home</a>
 </div>

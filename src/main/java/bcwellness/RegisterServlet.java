@@ -18,16 +18,26 @@ public class RegisterServlet extends HttpServlet {
         String user_password = PasswordHash.hashPassword(rawPassword);
 
         try(Connection conn = DBConnection.getConnection()) {
-            PreparedStatement check = conn.prepareStatement("SELECT * FROM users WHERE email=?");
-            check.setString(1, email);
-            ResultSet rs = check.executeQuery();
 
-            if (rs.next()){
+            PreparedStatement checkEmail = conn.prepareStatement("SELECT * FROM users WHERE email = ?");
+            checkEmail.setString(1, email);
+            ResultSet rsEmail = checkEmail.executeQuery();
+
+            if (rsEmail.next()){
                 request.setAttribute("message", "Email is already in use.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
+            PreparedStatement checkStudent = conn.prepareStatement("SELECT * FROM users WHERE student_number = ?");
+            checkStudent.setString(1, student_number);
+            ResultSet rsStudent = checkStudent.executeQuery();
+
+            if(rsStudent.next()){
+                request.setAttribute("studentCodeMessage", "This student number already exists.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
+            }
             PreparedStatement ps = conn.prepareStatement(
                     "INSERT INTO users (student_number, student_name, surname, email, phone, user_password) VALUES (?, ?, ?, ?, ?, ?)"
             );

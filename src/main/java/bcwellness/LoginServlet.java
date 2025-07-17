@@ -10,7 +10,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String rawPassword = request.getParameter("user_password");
 
-        // ✅ Hash the incoming password
+        // Hash the incoming password, which, if checked inside postgre, it will be hashed
         String hashedPassword = PasswordHash.hashPassword(rawPassword);
 
         try(Connection conn = DBConnection.getConnection()) {
