@@ -1,7 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <%
     String student = (String) session.getAttribute("student_name");
@@ -10,6 +6,10 @@
         return;
     }
 %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -20,7 +20,7 @@
 
     <p class="fade-in">You are successfully logged into your dashboard.</p>
 
-    <form action="logout.jsp" method="post" style="margin-top: 20px;">
+    <form action="logout" method="post" style="margin-top: 20px;">
         <input type="submit" value="Logout" class="button">
     </form>
 

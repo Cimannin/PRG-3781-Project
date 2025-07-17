@@ -8,21 +8,29 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         String email = request.getParameter("email");
-        String user_password =request.getParameter("user_password");
+        String rawPassword = request.getParameter("user_password");
+
+        // ✅ Hash the incoming password
+        String hashedPassword = PasswordHash.hashPassword(rawPassword);
 
         try(Connection conn = DBConnection.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE email=? AND password=?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE email=? AND user_password=?");
             ps.setString(1, email);
-            ps.setString(2, user_password);
+            ps.setString(2, hashedPassword);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
                 HttpSession session = request.getSession();
+                System.out.println("User found:" + rs.getString("student_name") );
+
                 session.setAttribute("student_name", rs.getString("student_name"));
                 session.setAttribute("email", rs.getString("email"));
+                session.setAttribute("successMessage", "Login successful! Welcome " + rs.getString("student_name") + ".");
                 response.sendRedirect("dashboard.jsp");
             }else{
+                System.out.println("User not found:" + rs.getString("student_name") );
+
                 request.setAttribute("Message", "Invalid credentials.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

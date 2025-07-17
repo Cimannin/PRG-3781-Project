@@ -14,7 +14,8 @@ public class RegisterServlet extends HttpServlet {
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String user_password = request.getParameter("user_password");
+        String rawPassword = request.getParameter("user_password");
+        String user_password = PasswordHash.hashPassword(rawPassword);
 
         try(Connection conn = DBConnection.getConnection()) {
             PreparedStatement check = conn.prepareStatement("SELECT * FROM users WHERE email=?");
@@ -38,6 +39,8 @@ public class RegisterServlet extends HttpServlet {
             ps.setString(6, user_password);
             ps.executeUpdate();
 
+            HttpSession session = request.getSession();
+            session.setAttribute("registerSuccess", "Registration successful! Please log in.");
             response.sendRedirect("login.jsp");
 
         }catch (Exception e){
